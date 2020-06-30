@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  h1 Learn-mongoose
+  fieldset
+    legend Login
+    label(for="#id") id
+    input#id(type="text")
+    br
+    label(for="#password") password
+    input#password(type="password")
+    br
+    button#login-btn Login
+  fieldset
+    legend Join
+    label(for="#user-id") id
+    input#user-id(type="text")
+    br
+    label(for="#user-password") password
+    input#user-password(type="password")
+    br
+    label(for="#user-nick") nickname
+    input#user-nick(type="text")
+    br
+    button#join-btn Join
+  fieldset
+    legend 회원명단
+    .userlist
+    each user in users
+      li= user.userId
+       
+
+  
