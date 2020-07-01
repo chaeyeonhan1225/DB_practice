@@ -1,6 +1,8 @@
 const joinbtn = document.querySelector('#join-btn');
+const searchbtn = document.querySelector('#search-btn');
 
 joinbtn.addEventListener("click",join);
+searchbtn.addEventListener("click",searchnick);
 
 function join(){
     const user_id = document.querySelector('#user-id');
@@ -33,3 +35,31 @@ function join(){
         alert("아이디, 비밀번호, 닉네임을 입력해주세요!");
     }
 };
+
+function searchnick(){
+    const userId = document.querySelector("#search").value;
+    if(userId){
+        fetch('http://localhost:8001/user/search',{
+            method: "POST",
+            body: JSON.stringify({
+                userId: userId
+            }),
+            headers:{
+                "Content-Type": "application/json; charset=UTF-8"
+            }
+        }).then(response=>{ 
+            if([200,201].includes(response.status)){
+                response.json().then((resolve)=>{
+                    console.log(resolve);
+                    document.querySelector("#search").value = "";
+                    let result = document.createElement('li');
+                    result.innerHTML = resolve.result;
+                    document.querySelector('#search-nick').appendChild(result);
+                    alert("검색 완료");
+                }).catch((error)=>{
+                    console.error(error);
+                });
+            } 
+        });
+    }
+}

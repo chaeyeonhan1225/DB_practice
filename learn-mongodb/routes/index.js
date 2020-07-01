@@ -8,7 +8,8 @@ router.get('/',(req,res,next)=>{
     .then((users)=>{
         res.render('main',{
             title:"Learn Mongoose",
-            users });
+            users,
+        });
     })
     .catch((err)=>{
         console.error(err);

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../schemas/user');
+const user = require('../schemas/user');
 
 // user/join
 router.post('/join',(req,res,next)=>{
@@ -20,6 +21,29 @@ router.post('/join',(req,res,next)=>{
         });
 });
 
+// user/search
+router.post('/search',(req,res,next)=>{
+    const userId = req.body.userId;
+    if(userId){
+        User.findOne({
+            userId: userId
+        })
+        .then((result)=>{
+            if(result){
+                res.status(201).json({result:result.nick});
+            } else {
+                res.status(201).send({result:"검색 결과가 없습니다."});
+            }
+        })
+        .catch((err)=>{
+            console.error(err);
+            next(error);
+        });
+        
+    }
+});
+
 // user/login
+
 
 module.exports = router;

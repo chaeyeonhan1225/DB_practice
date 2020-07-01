@@ -28,6 +28,12 @@ block content
     .userlist
     each user in users
       li= user.userId
+  fieldset#search-nick
+    legend 회원 닉네임 조회
+    input#search(type="text")
+    button#search-btn search
+    if(nick)
+      li= nick
        
 
   
