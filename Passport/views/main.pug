@@ -1,0 +1,21 @@
+doctype
+html
+  head
+    title Passport
+    meta(charset="UTF-8")
+  body
+    h1 Passport
+      if(!user)
+        fieldset
+            legend Login
+            if(message)
+              h3 #{message}
+            label(for="user_id") id
+            input(type="text" id="user_id")
+            label(for="user_password") password
+            input(type="password" id="user_password")
+            button(id="login_btn") login
+      else
+        h3 #{user.userId} 님 안녕하세요!
+        a(href="/auth/logout") logout
+    script(src="main.js")
